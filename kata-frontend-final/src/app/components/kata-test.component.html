@@ -1,0 +1,54 @@
+<div class="container d-flex align-items-center justify-content-center mb-5">
+  <button type="button" class="btn btn-primary " (click)="tester()">
+    tester kata
+  </button>
+</div>
+
+<!-- Result -->
+<table class="table table-success table-striped table-bordered" *ngIf="result !== ''">
+  <thead>
+    <tr>
+      <th scope="col">Input</th>
+      <th scope="col">Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{data}}</th>
+      <td>{{result}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<!-- Modal -->
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Veuillez saisir un nombre</h5>
+        <button type="button" class="btn-close" (click)="hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #myForm="ngForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <input type="number" class="form-control" id="input" name="input" [(ngModel)]="userData.input" required min="1">
+            <div
+              *ngIf="myForm.controls['input'].errors && (myForm.controls['input'].dirty || myForm.controls['input'].touched)"
+              class="text-danger">
+              <div *ngIf="myForm.controls['input'].errors['required']">ce champ est obligatoire</div>
+              <div *ngIf="myForm.controls['input'].errors['min']">Valeur min 1</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="hide()">fermer</button>
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.controls['input'].errors">valider</button>
+          </div>
+        
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
